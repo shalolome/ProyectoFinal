@@ -75,6 +75,42 @@ public class LogicaDistributivo {
         }
     }
 
+    //Metodo para Listar Distributivo por Grado
+    public Object[][] ListarPorGrado(long codigoGrado) {
+        try {
+            Conexion conexion = new Conexion();
+            ResultSet rs = conexion.Consulta("SELECT codigo_dist, CONCAT(pnombre_pers, ' ', snombre_pers, ' ', apaterno_pers, ' ', amaterno_pers) AS docente,\n"
+                    + "CONCAT(nombre_curs, ' ', nombre_para, ' ', nombre_secc, ' ', ainicio_alec, ' - ', afin_alec) AS curso, nombre_asig\n"
+                    + "FROM siacc_distributivo INNER JOIN siacc_grado ON siacc_distributivo.codigo_grad=siacc_grado.codigo_grad\n"
+                    + "INNER JOIN siacc_cursos ON siacc_cursos.codigo_curs=siacc_grado.codigo_curs\n"
+                    + "INNER JOIN siacc_paralelo ON siacc_paralelo.codigo_para=siacc_grado.codigo_para\n"
+                    + "INNER JOIN siacc_seccion ON siacc_seccion.codigo_secc=siacc_grado.codigo_secc\n"
+                    + "INNER JOIN siacc_anio_lectivo ON siacc_anio_lectivo.codigo_alec=siacc_grado.codigo_alec\n"
+                    + "INNER JOIN siacc_malla ON siacc_malla.codigo_mall=siacc_distributivo.codigo_mall\n"
+                    + "INNER JOIN siacc_asignatura ON siacc_asignatura.codigo_asig=siacc_malla.codigo_asig\n"
+                    + "INNER JOIN siacc_asigcargos ON siacc_distributivo.codigo_acar=siacc_asigcargos.codigo_acar\n"
+                    + "INNER JOIN siacc_padministrativo ON siacc_asigcargos.codigo_padm=siacc_padministrativo.codigo_padm\n"
+                    + "INNER JOIN siacc_persona ON siacc_padministrativo.codigo_pers=siacc_persona.codigo_pers\n"
+                    + "WHERE estado_dist LIKE 'A' AND siacc_grado.codigo_grad='"+codigoGrado+"'");
+            rs.last();
+            Object[][] obj = new Object[rs.getRow()][4];
+            rs.beforeFirst();
+            int i = 0;
+
+            while (rs.next()) {
+                obj[i][0] = rs.getString("codigo_dist");
+                obj[i][1] = rs.getString("docente");
+                obj[i][2] = rs.getString("curso");
+                obj[i][3] = rs.getString("nombre_asig");
+
+                i++;
+            }
+            return obj;
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al obtener Listado de Distributivos por Grado...");
+        }
+    }
+    
     ////Buscar Distributivos por Codigo
     public Distributivo buscarDistributivoPorCod(long codigo) {
         try {

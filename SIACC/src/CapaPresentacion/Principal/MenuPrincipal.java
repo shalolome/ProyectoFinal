@@ -11,7 +11,8 @@ import CapaPresentacion.GestionAdministrativa.AsignacionCargos.AsignacionCargos;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.ConfiguracionSecciones;
 import CapaPresentacion.GestionAdministrativa.ControlInformacionInstitucional.InformacionInstitucional;
 import CapaPresentacion.GestionAdministrativa.ControlPersonal.PersonalAdministrativo;
-import CapaPresentacion.GestionCalificaciones.ControlPeriodoAcademico.PeriodoAcademico;
+import CapaPresentacion.GestionCalificaciones.ControlActas.PeriodoAcademico;
+import CapaPresentacion.GestionCalificaciones.ControlCalificaciones.Parciales.CalificacionesParciales;
 import CapaPresentacion.GestionEstudiantil.ControlRepresentantes.ControlRepresentantes;
 import CapaPresentacion.GestionEstudiantil.InscripcionEstudiantil.InscripcionEstudiantil;
 import CapaPresentacion.GestionEstudiantil.Matriculacion.Matriculacion;
@@ -75,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lypnlFondoLayout.setHorizontalGroup(
             lypnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lypnlFondoLayout.createSequentialGroup()
-                .addContainerGap(258, Short.MAX_VALUE)
+                .addContainerGap(380, Short.MAX_VALUE)
                 .addComponent(lblLogo)
                 .addGap(214, 214, 214))
         );
@@ -274,7 +275,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuGestionAdminitrativa3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
         MenuItemPeriodoAcademico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemPeriodoAcademico.setText("Control de Quimestres y Parciales");
+        MenuItemPeriodoAcademico.setText("Control de Actas ");
         MenuItemPeriodoAcademico.setBorder(null);
         MenuItemPeriodoAcademico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,7 +300,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuControlCalificaciones.add(jSeparator12);
 
         MenuItemNotasQuimestre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemNotasQuimestre.setText("Control de Parciales");
+        MenuItemNotasQuimestre.setText("Control de Quimestres");
         MenuItemNotasQuimestre.setActionCommand("Control de Quimestres");
         MenuItemNotasQuimestre.setBorder(null);
         MenuItemNotasQuimestre.addActionListener(new java.awt.event.ActionListener() {
@@ -414,7 +415,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemPeriodoAcademicoActionPerformed
 
     private void MenuItemNotasParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasParcialActionPerformed
-        // TODO add your handling code here:
+        CalificacionesParciales frm = new CalificacionesParciales(this, true);
+        frm.setLocationRelativeTo(null);
+        frm.setVisible(true);
     }//GEN-LAST:event_MenuItemNotasParcialActionPerformed
 
     private void MenuItemNotasQuimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasQuimestreActionPerformed

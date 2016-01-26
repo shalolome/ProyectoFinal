@@ -1,16 +1,50 @@
 
-package CapaPresentacion.GestionCalificaciones.ControlPeriodoAcademico;
-
-import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.*;
+package CapaPresentacion.GestionCalificaciones.ControlCalificaciones.Parciales;
+import CapaPresentacion.GestionAcademica.DistributivoDocentes.*;
+import CapaPresentacion.GestionAcademica.ControlCursos.*;
+import CapaDatos.Entidades.GestionAdministrativa.Institucional.Institucion;
+import CapaLogica.GestionAcademica.Curso.LogicaGrado;
+import CapaLogica.GestionAdministrativa.Institucional.LogicaInstitucion;
+import CapaPresentacion.Utilidades.Alertas.Mensajes;
 import java.awt.Frame;
+import javax.swing.table.DefaultTableModel;
 
-public class PeriodoAcademico extends javax.swing.JDialog {
+public class SeleccionGrado extends javax.swing.JDialog {
 
-    public PeriodoAcademico(java.awt.Frame parent, boolean modal) {
+    LogicaInstitucion logicaUnidadEducativa = new LogicaInstitucion();
+    Institucion objInstituto = new Institucion();
+    
+    String[] tblEtiqueta = new String[]{"CODIGO",
+        "SECCION",
+        "CURSO",
+        "PARALELO",
+        "AÑO LECTIVO"};
+    
+    LogicaGrado logica = new LogicaGrado();
+
+    Mensajes mensaje = new Mensajes();
+    private boolean bandera = false;
+    private long codigo;
+    
+    public SeleccionGrado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        objInstituto = logicaUnidadEducativa.buscarInsititucionPorCod(1);
+        lblInstitucion.setText(objInstituto.getNombre());
+        listar();
     }
 
+    public void listar() {
+        tblListado.setModel(new DefaultTableModel(logica.Listar(), tblEtiqueta) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        });
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -20,55 +54,28 @@ public class PeriodoAcademico extends javax.swing.JDialog {
         lblTitulo = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblInstitucion = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Control de Quimestre y Parciales");
+        setTitle("Control de Cursos");
 
         pnlFondo.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblTitulo.setText("Control de Quimestres y Parciales");
+        lblTitulo.setText("Selección de Grados");
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionCalificaciones/periodoAcademico.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionAcademica/cursos.png"))); // NOI18N
 
         lblInstitucion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblInstitucion.setText("Institución");
 
-        btnNuevo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnNuevo.setText("Nuevo");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
-        btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        btnActualizar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnSeleccionarActionPerformed(evt);
             }
         });
 
@@ -78,15 +85,20 @@ public class PeriodoAcademico extends javax.swing.JDialog {
 
             },
             new String [] {
-                "CODIGO", "MODALIDAD", "DIVISION"
+                "CODIGO", "SECCION", "CURSO", "PARALELO", "AÑO LECTIVO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblListadoMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblListado);
@@ -100,26 +112,17 @@ public class PeriodoAcademico extends javax.swing.JDialog {
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addComponent(lblLogo)
-                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFondoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlFondoLayout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(73, 73, 73)
+                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(185, Short.MAX_VALUE))))
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGap(243, 243, 243)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlFondoLayout.setVerticalGroup(
@@ -130,17 +133,12 @@ public class PeriodoAcademico extends javax.swing.JDialog {
                         .addGap(22, 22, 22)
                         .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblInstitucion)
-                        .addGap(35, 35, 35)
-                        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNuevo)
-                            .addComponent(btnActualizar)
-                            .addComponent(btnEliminar)))
-                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblInstitucion))
+                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar)
+                .addComponent(btnSeleccionar)
                 .addContainerGap(146, Short.MAX_VALUE))
         );
 
@@ -170,23 +168,29 @@ public class PeriodoAcademico extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        if (tblListado.getSelectedRow() > -1) {
+            setBandera(true);
+            int fila = tblListado.getSelectedRow();
+            long codigo = Long.parseLong((tblListado.getValueAt(fila, 0)).toString());
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        NuevaSeccion frm = new NuevaSeccion((Frame) this.getParent(), true);
-        frm.setLocationRelativeTo(null);
-        frm.setVisible(true);
-    }//GEN-LAST:event_btnNuevoActionPerformed
+            setCodigo(codigo);
+            this.dispose();
+        } else {
+            mensaje.MensajeError("Seleccione un elemento de la Lista", "ERROR DE SELECCION");
+        }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    private void tblListadoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListadoMouseReleased
+        if (evt.getClickCount() == 2) {
+            setBandera(true);
+            int fila = tblListado.getSelectedRow();
+            long codigo = Long.parseLong((tblListado.getValueAt(fila, 0)).toString());
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
+            setCodigo(codigo);
+            this.dispose();
+        }
+    }//GEN-LAST:event_tblListadoMouseReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -202,20 +206,20 @@ public class PeriodoAcademico extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfiguracionSecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfiguracionSecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfiguracionSecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfiguracionSecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Cursos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConfiguracionSecciones dialog = new ConfiguracionSecciones(new javax.swing.JFrame(), true);
+                Cursos dialog = new Cursos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -228,10 +232,7 @@ public class PeriodoAcademico extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblInstitucion;
     private javax.swing.JLabel lblLogo;
@@ -240,4 +241,20 @@ public class PeriodoAcademico extends javax.swing.JDialog {
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JTable tblListado;
     // End of variables declaration//GEN-END:variables
+
+    public boolean isBandera() {
+        return bandera;
+    }
+
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
+    }
+
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
+    }
 }
