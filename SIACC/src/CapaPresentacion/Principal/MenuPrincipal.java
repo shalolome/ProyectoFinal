@@ -60,7 +60,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuGestionAdminitrativa3 = new javax.swing.JMenu();
         MenuItemPeriodoAcademico = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
-        MenuItemConfiguracionSecciones5 = new javax.swing.JMenuItem();
+        menuControlCalificaciones = new javax.swing.JMenu();
+        MenuItemNotasParcial = new javax.swing.JMenuItem();
+        jSeparator12 = new javax.swing.JPopupMenu.Separator();
+        MenuItemNotasQuimestre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIACC");
@@ -71,8 +74,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lypnlFondo.setLayout(lypnlFondoLayout);
         lypnlFondoLayout.setHorizontalGroup(
             lypnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lypnlFondoLayout.createSequentialGroup()
-                .addContainerGap(227, Short.MAX_VALUE)
+            .addGroup(lypnlFondoLayout.createSequentialGroup()
+                .addContainerGap(258, Short.MAX_VALUE)
                 .addComponent(lblLogo)
                 .addGap(214, 214, 214))
         );
@@ -281,10 +284,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuGestionAdminitrativa3.add(MenuItemPeriodoAcademico);
         menuGestionAdminitrativa3.add(jSeparator11);
 
-        MenuItemConfiguracionSecciones5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemConfiguracionSecciones5.setText("Control de Actas de Calificaciones");
-        MenuItemConfiguracionSecciones5.setBorder(null);
-        menuGestionAdminitrativa3.add(MenuItemConfiguracionSecciones5);
+        menuControlCalificaciones.setText("Control de Calificaciones");
+        menuControlCalificaciones.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+
+        MenuItemNotasParcial.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        MenuItemNotasParcial.setText("Control de Parciales");
+        MenuItemNotasParcial.setBorder(null);
+        MenuItemNotasParcial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemNotasParcialActionPerformed(evt);
+            }
+        });
+        menuControlCalificaciones.add(MenuItemNotasParcial);
+        menuControlCalificaciones.add(jSeparator12);
+
+        MenuItemNotasQuimestre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        MenuItemNotasQuimestre.setText("Control de Parciales");
+        MenuItemNotasQuimestre.setActionCommand("Control de Quimestres");
+        MenuItemNotasQuimestre.setBorder(null);
+        MenuItemNotasQuimestre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemNotasQuimestreActionPerformed(evt);
+            }
+        });
+        menuControlCalificaciones.add(MenuItemNotasQuimestre);
+
+        menuGestionAdminitrativa3.add(menuControlCalificaciones);
 
         jMenuBar1.add(menuGestionAdminitrativa3);
 
@@ -388,6 +413,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_MenuItemPeriodoAcademicoActionPerformed
 
+    private void MenuItemNotasParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasParcialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemNotasParcialActionPerformed
+
+    private void MenuItemNotasQuimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasQuimestreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuItemNotasQuimestreActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -423,7 +456,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuItemAsignacionCargos;
     private javax.swing.JMenuItem MenuItemConfiguracionSecciones;
-    private javax.swing.JMenuItem MenuItemConfiguracionSecciones5;
     private javax.swing.JMenuItem MenuItemControlAsignaturas;
     private javax.swing.JMenuItem MenuItemControlCursos;
     private javax.swing.JMenuItem MenuItemControlRepresentantes;
@@ -433,6 +465,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemInscripcionEstudiantil;
     private javax.swing.JMenuItem MenuItemMallaCurricular;
     private javax.swing.JMenuItem MenuItemMatriculacion;
+    private javax.swing.JMenuItem MenuItemNotasParcial;
+    private javax.swing.JMenuItem MenuItemNotasQuimestre;
     private javax.swing.JMenuItem MenuItemPeriodoAcademico;
     private javax.swing.JMenuItem MenuItemPeriodoLectivo;
     private javax.swing.JMenuItem MenuItemPersonalAdministrativo;
@@ -440,6 +474,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
@@ -451,6 +486,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLayeredPane lypnlFondo;
     private javax.swing.JLayeredPane lypnlMenu;
+    private javax.swing.JMenu menuControlCalificaciones;
     private javax.swing.JMenu menuGestionAdminitrativa;
     private javax.swing.JMenu menuGestionAdminitrativa1;
     private javax.swing.JMenu menuGestionAdminitrativa2;
