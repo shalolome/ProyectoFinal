@@ -1,8 +1,6 @@
 package CapaLogica.GestionEstudiantil;
 
-import CapaLogica.GestionAcademica.Curso.*;
 import CapaDatos.ConexionBD.Conexion;
-import CapaDatos.Entidades.GestionAcademica.Curso.Grado;
 import CapaDatos.Entidades.GestionEstudiantil.Matricula;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -73,7 +71,44 @@ public class LogicaMatricula {
             }
             return obj;
         } catch (Exception ex) {
-            throw new RuntimeException("Error al obtener Listado de Grados...");
+            throw new RuntimeException("Error al obtener Listado de Matriculas...");
+        }
+    }
+    
+    //Metodo para Listar Matricula por Grado
+    public Object[][] ListarPorGrado(long codGrado) {
+        try {
+            Conexion conexion = new Conexion();
+            ResultSet rs = conexion.Consulta("SELECT codigo_matr, cedula_pers, pnombre_pers, snombre_pers, apaterno_pers, amaterno_pers,\n"
+                    + "nombre_curs, nombre_para, nombre_secc\n"
+                    + "FROM siacc_matricula INNER JOIN siacc_grado ON siacc_matricula.codigo_grad=siacc_grado.codigo_grad\n"
+                    + "INNER JOIN siacc_cursos ON siacc_grado.codigo_curs=siacc_cursos.codigo_curs\n"
+                    + "INNER JOIN siacc_paralelo ON siacc_grado.codigo_para=siacc_paralelo.codigo_para\n"
+                    + "INNER JOIN siacc_seccion ON siacc_grado.codigo_secc=siacc_seccion.codigo_secc\n"
+                    + "INNER JOIN siacc_estudiante ON siacc_matricula.codigo_estu=siacc_estudiante.codigo_estu\n"
+                    + "INNER JOIN siacc_persona ON siacc_estudiante.codigo_pers=siacc_persona.codigo_pers\n"
+                    + "WHERE estado_matr LIKE 'A' AND siacc_grado.codigo_grad='"+codGrado+"'");
+            rs.last();
+            Object[][] obj = new Object[rs.getRow()][9];
+            rs.beforeFirst();
+            int i = 0;
+
+            while (rs.next()) {
+                obj[i][0] = rs.getString("codigo_matr");
+                obj[i][1] = rs.getString("cedula_pers");
+                obj[i][2] = rs.getString("pnombre_pers");
+                obj[i][3] = rs.getString("snombre_pers");
+                obj[i][4] = rs.getString("apaterno_pers");
+                obj[i][5] = rs.getString("amaterno_pers");
+                obj[i][6] = rs.getString("nombre_curs");
+                obj[i][7] = rs.getString("nombre_para");
+                obj[i][8] = rs.getString("nombre_secc");
+
+                i++;
+            }
+            return obj;
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al obtener Listado de Matriculas por Grados...");
         }
     }
 
