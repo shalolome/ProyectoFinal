@@ -7,7 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Control de Quimestre y Parciales"/>
+    <Property name="title" type="java.lang.String" value="Control de Calificaciones"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -219,6 +219,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblListadoMouseReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -270,7 +273,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="btnNuevo" min="-2" pref="113" max="-2" attributes="0"/>
+                                          <Component id="btnAgregar" min="-2" pref="113" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="btnActualizar" min="-2" pref="115" max="-2" attributes="0"/>
                                       </Group>
@@ -337,7 +340,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="btnActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -386,7 +389,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnNuevo">
+                        <Component class="javax.swing.JButton" name="btnAgregar">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="14" style="1"/>
@@ -394,7 +397,7 @@
                             <Property name="text" type="java.lang.String" value="Agregar"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnActualizar">
@@ -452,6 +455,9 @@
                             <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Parcial"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnParcialActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="rbtnQuimestre">
                           <Properties>
@@ -463,6 +469,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Quimestre"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnQuimestreActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblLogo">
                           <Properties>

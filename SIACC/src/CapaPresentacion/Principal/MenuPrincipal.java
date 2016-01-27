@@ -11,8 +11,8 @@ import CapaPresentacion.GestionAdministrativa.AsignacionCargos.AsignacionCargos;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.ConfiguracionSecciones;
 import CapaPresentacion.GestionAdministrativa.ControlInformacionInstitucional.InformacionInstitucional;
 import CapaPresentacion.GestionAdministrativa.ControlPersonal.PersonalAdministrativo;
-import CapaPresentacion.GestionCalificaciones.ControlActas.PeriodoAcademico;
-import CapaPresentacion.GestionCalificaciones.ControlCalificaciones.Parciales.CalificacionesParciales;
+import CapaPresentacion.GestionCalificaciones.ControlActas.CalificacionesParciales;
+import CapaPresentacion.GestionCalificaciones.ControlCalificaciones.CalificacionesGenerales;
 import CapaPresentacion.GestionEstudiantil.ControlRepresentantes.ControlRepresentantes;
 import CapaPresentacion.GestionEstudiantil.InscripcionEstudiantil.InscripcionEstudiantil;
 import CapaPresentacion.GestionEstudiantil.Matriculacion.Matriculacion;
@@ -59,9 +59,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         MenuItemMatriculacion = new javax.swing.JMenuItem();
         menuGestionAdminitrativa3 = new javax.swing.JMenu();
-        MenuItemPeriodoAcademico = new javax.swing.JMenuItem();
+        MenuItemCalificaciones = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
-        menuControlCalificaciones = new javax.swing.JMenu();
+        menuControlActas = new javax.swing.JMenu();
         MenuItemNotasParcial = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         MenuItemNotasQuimestre = new javax.swing.JMenuItem();
@@ -274,43 +274,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
         menuGestionAdminitrativa3.setText("Gestión de Calificaciones");
         menuGestionAdminitrativa3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
 
-        MenuItemPeriodoAcademico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemPeriodoAcademico.setText("Control de Actas ");
-        MenuItemPeriodoAcademico.setBorder(null);
-        MenuItemPeriodoAcademico.addActionListener(new java.awt.event.ActionListener() {
+        MenuItemCalificaciones.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        MenuItemCalificaciones.setText("Control de Calificaciones ");
+        MenuItemCalificaciones.setBorder(null);
+        MenuItemCalificaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemPeriodoAcademicoActionPerformed(evt);
+                MenuItemCalificacionesActionPerformed(evt);
             }
         });
-        menuGestionAdminitrativa3.add(MenuItemPeriodoAcademico);
+        menuGestionAdminitrativa3.add(MenuItemCalificaciones);
         menuGestionAdminitrativa3.add(jSeparator11);
 
-        menuControlCalificaciones.setText("Control de Calificaciones");
-        menuControlCalificaciones.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        menuControlActas.setText("Control de Actas");
+        menuControlActas.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
         MenuItemNotasParcial.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemNotasParcial.setText("Control de Parciales");
         MenuItemNotasParcial.setBorder(null);
+        MenuItemNotasParcial.setLabel("Por Parciales");
         MenuItemNotasParcial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemNotasParcialActionPerformed(evt);
             }
         });
-        menuControlCalificaciones.add(MenuItemNotasParcial);
-        menuControlCalificaciones.add(jSeparator12);
+        menuControlActas.add(MenuItemNotasParcial);
+        menuControlActas.add(jSeparator12);
 
         MenuItemNotasQuimestre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        MenuItemNotasQuimestre.setText("Control de Quimestres");
-        MenuItemNotasQuimestre.setActionCommand("Control de Quimestres");
         MenuItemNotasQuimestre.setBorder(null);
+        MenuItemNotasQuimestre.setLabel("Por Quimestres");
         MenuItemNotasQuimestre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuItemNotasQuimestreActionPerformed(evt);
             }
         });
-        menuControlCalificaciones.add(MenuItemNotasQuimestre);
+        menuControlActas.add(MenuItemNotasQuimestre);
 
-        menuGestionAdminitrativa3.add(menuControlCalificaciones);
+        menuGestionAdminitrativa3.add(menuControlActas);
 
         jMenuBar1.add(menuGestionAdminitrativa3);
 
@@ -408,11 +407,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_MenuItemControlRepresentantesActionPerformed
 
-    private void MenuItemPeriodoAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPeriodoAcademicoActionPerformed
-        PeriodoAcademico frm = new PeriodoAcademico(this, true);
+    private void MenuItemCalificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCalificacionesActionPerformed
+        CalificacionesGenerales frm = new CalificacionesGenerales(this, true);
         frm.setLocationRelativeTo(null);
         frm.setVisible(true);
-    }//GEN-LAST:event_MenuItemPeriodoAcademicoActionPerformed
+    }//GEN-LAST:event_MenuItemCalificacionesActionPerformed
 
     private void MenuItemNotasParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasParcialActionPerformed
         CalificacionesParciales frm = new CalificacionesParciales(this, true);
@@ -458,6 +457,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuItemAsignacionCargos;
+    private javax.swing.JMenuItem MenuItemCalificaciones;
     private javax.swing.JMenuItem MenuItemConfiguracionSecciones;
     private javax.swing.JMenuItem MenuItemControlAsignaturas;
     private javax.swing.JMenuItem MenuItemControlCursos;
@@ -470,14 +470,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuItemMatriculacion;
     private javax.swing.JMenuItem MenuItemNotasParcial;
     private javax.swing.JMenuItem MenuItemNotasQuimestre;
-    private javax.swing.JMenuItem MenuItemPeriodoAcademico;
     private javax.swing.JMenuItem MenuItemPeriodoLectivo;
     private javax.swing.JMenuItem MenuItemPersonalAdministrativo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
-    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JPopupMenu.Separator jSeparator12;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
@@ -489,7 +488,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLayeredPane lypnlFondo;
     private javax.swing.JLayeredPane lypnlMenu;
-    private javax.swing.JMenu menuControlCalificaciones;
+    private javax.swing.JMenu menuControlActas;
     private javax.swing.JMenu menuGestionAdminitrativa;
     private javax.swing.JMenu menuGestionAdminitrativa1;
     private javax.swing.JMenu menuGestionAdminitrativa2;

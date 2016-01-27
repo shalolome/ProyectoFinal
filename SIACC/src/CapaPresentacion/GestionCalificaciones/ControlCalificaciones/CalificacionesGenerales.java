@@ -1,4 +1,4 @@
-package CapaPresentacion.GestionCalificaciones.ControlCalificaciones.Parciales;
+package CapaPresentacion.GestionCalificaciones.ControlCalificaciones;
 
 import CapaDatos.Entidades.GestionAcademica.Asignatura.Asignatura;
 import CapaDatos.Entidades.GestionAcademica.Asignatura.Distributivo;
@@ -9,6 +9,7 @@ import CapaDatos.Entidades.GestionAcademica.Curso.Paralelo;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.AnioLectivo;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.Institucion;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.Seccion;
+import CapaDatos.Entidades.GestionCalificaciones.Calificaciones;
 import CapaDatos.Entidades.GestionCalificaciones.PeriodoAcademicos;
 import CapaDatos.Entidades.GestionCalificaciones.TipoNota;
 import CapaLogica.GestionAcademica.Asignatura.LogicaAsignatura;
@@ -20,11 +21,12 @@ import CapaLogica.GestionAcademica.Curso.LogicaParalelo;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaAnioLectivo;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaInstitucion;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaSecciones;
+import CapaLogica.GestionCalificaciones.LogicaCalificaciones;
 import CapaLogica.GestionCalificaciones.LogicaPeriodoAcademico;
 import CapaLogica.GestionCalificaciones.LogicaTipoNota;
 import CapaLogica.GestionEstudiantil.LogicaMatricula;
-import CapaPresentacion.GestionCalificaciones.ControlActas.*;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.*;
+import CapaPresentacion.Utilidades.Alertas.Mensajes;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,19 +35,22 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CalificacionesParciales extends javax.swing.JDialog {
+public class CalificacionesGenerales extends javax.swing.JDialog {
 
     LogicaInstitucion logicaUnidadEducativa = new LogicaInstitucion();
     Institucion objInstituto = new Institucion();
 
     LogicaDistributivo logicaDistributivo = new LogicaDistributivo();
     LogicaMatricula logicaMatricula = new LogicaMatricula();
+
+    LogicaCalificaciones logica = new LogicaCalificaciones();
+    Calificaciones obj = new Calificaciones();
     
     String[] tblEtiquetaDistributivo = new String[]{"CODIGO",
         "DOCENTE",
         "CURSO",
         "ASIGNATURA"};
-    
+
     String[] tblEtiquetaNomina = new String[]{"CODIGO",
         "CEDULA",
         "PRIMER NOMBRE",
@@ -56,17 +61,30 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         "PARALELO",
         "SECCION"};
 
+    Mensajes mensaje = new Mensajes();
+    
     private long codigoGrado;
     private long codigoDistributivo;
+    private long codigoPeriodo;
+    private long codigoMatricula;
 
-    public CalificacionesParciales(java.awt.Frame parent, boolean modal) {
+    public CalificacionesGenerales(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         try {
             listarQuimestres();
             listarTipoNota();
+
+            if (rbtnQuimestre.isSelected()) {
+                setCodigoPeriodo(((PeriodoAcademicos) cmbQuimestre.getSelectedItem()).getCodigo());
+            }
+
+            if (rbtnParcial.isSelected()) {
+                setCodigoPeriodo(((PeriodoAcademicos) cmbParcial.getSelectedItem()).getCodigo());
+            }
+
         } catch (SQLException ex) {
-            Logger.getLogger(CalificacionesParciales.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CalificacionesGenerales.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         objInstituto = logicaUnidadEducativa.buscarInsititucionPorCod(1);
@@ -90,7 +108,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             }
         });
     }
-    
+
     //Metodo para Listar Quimestres
     private void listarQuimestres() throws SQLException {
         ArrayList<PeriodoAcademicos> lista;
@@ -110,7 +128,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             cmbTipoNota.addItem(lista.get(i));
         }
     }
-    
+
     //Metodo para Listar Parciales
     private void listarParciales(long cod) throws SQLException {
         ArrayList<PeriodoAcademicos> lista;
@@ -140,7 +158,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         lblQuimestre = new javax.swing.JLabel();
         lblParcial = new javax.swing.JLabel();
         cmbParcial = new javax.swing.JComboBox();
-        btnNuevo = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         lblParcial1 = new javax.swing.JLabel();
         cmbTipoNota = new javax.swing.JComboBox();
@@ -168,7 +186,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         tblListadoDistributivo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Control de Quimestre y Parciales");
+        setTitle("Control de Calificaciones");
 
         pnlFondo.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -203,6 +221,11 @@ public class CalificacionesParciales extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblListadoMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblListado);
 
         tpnlPrincipal.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -222,11 +245,11 @@ public class CalificacionesParciales extends javax.swing.JDialog {
 
         cmbParcial.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
-        btnNuevo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnNuevo.setText("Agregar");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -252,10 +275,20 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         rbtnParcial.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         rbtnParcial.setSelected(true);
         rbtnParcial.setText("Parcial");
+        rbtnParcial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnParcialActionPerformed(evt);
+            }
+        });
 
         btnGrpPeriodo.add(rbtnQuimestre);
         rbtnQuimestre.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         rbtnQuimestre.setText("Quimestre");
+        rbtnQuimestre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnQuimestreActionPerformed(evt);
+            }
+        });
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionCalificaciones/periodoAcademico.png"))); // NOI18N
 
@@ -280,7 +313,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
@@ -333,14 +366,14 @@ public class CalificacionesParciales extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnActualizar)
-                            .addComponent(btnNuevo))))
+                            .addComponent(btnAgregar))))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jLayeredPane2.setLayer(cmbQuimestre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(lblQuimestre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(lblParcial, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(cmbParcial, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(btnNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(btnAgregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(lblParcial1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(cmbTipoNota, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -590,11 +623,28 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        NuevaSeccion frm = new NuevaSeccion((Frame) this.getParent(), true);
-        frm.setLocationRelativeTo(null);
-        frm.setVisible(true);
-    }//GEN-LAST:event_btnNuevoActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (rbtnQuimestre.isSelected()) {
+            setCodigoPeriodo(((PeriodoAcademicos) cmbQuimestre.getSelectedItem()).getCodigo());
+        }
+
+        if (rbtnParcial.isSelected()) {
+            setCodigoPeriodo(((PeriodoAcademicos) cmbParcial.getSelectedItem()).getCodigo());
+        }
+        
+        obj.setCodigoMatricula(codigoMatricula);
+        obj.setCodigoDistributivo(codigoDistributivo);
+        obj.setCodigoTipoNota(((TipoNota) cmbTipoNota.getSelectedItem()).getCodigo());
+        obj.setCodigoPeriodoAcedemico(codigoPeriodo);
+        obj.setNota(Float.parseFloat(txtNota.getText()));
+        obj.setEstado('A');
+        
+        logica.Insertar(obj);
+
+        mensaje.MensajeInformacion("Se ha registrado correctamente", "Registrar");
+        
+        txtNota.setText("0.00");
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
@@ -621,7 +671,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             listarDistPorGrado(obj.getCodigo());
 
             txtAsignatura.setText("");
-            
+
             listarMatrPorGrado(obj.getCodigo());
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
@@ -638,6 +688,8 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             Malla objMalla = new LogicaMallaCurricular().buscarMallaPorCod(obj.getCodigoMallaCurricular());
             Asignatura asignatura = new LogicaAsignatura().buscarAsignaturaPorCod(objMalla.getCodigoAsignatura());
             txtAsignatura.setText(asignatura.getNombre());
+
+            txtDocente.setText(asignatura.getNombre());
         }
     }//GEN-LAST:event_tblListadoDistributivoMouseReleased
 
@@ -652,6 +704,24 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, ex.toString());
         }
     }//GEN-LAST:event_cmbQuimestreItemStateChanged
+
+    private void rbtnQuimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnQuimestreActionPerformed
+        System.out.println("Quimestre");
+    }//GEN-LAST:event_rbtnQuimestreActionPerformed
+
+    private void rbtnParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnParcialActionPerformed
+        System.out.println("Parcial");
+    }//GEN-LAST:event_rbtnParcialActionPerformed
+
+    private void tblListadoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListadoMouseReleased
+        if (evt.getClickCount() == 2) {
+
+            int fila = tblListado.getSelectedRow();
+            long codigo = Long.parseLong((tblListado.getValueAt(fila, 0)).toString());
+
+            setCodigoMatricula(codigo);
+        }
+    }//GEN-LAST:event_tblListadoMouseReleased
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -694,9 +764,9 @@ public class CalificacionesParciales extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.ButtonGroup btnGrpPeriodo;
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JComboBox cmbParcial;
     private javax.swing.JComboBox cmbQuimestre;
@@ -750,5 +820,21 @@ public class CalificacionesParciales extends javax.swing.JDialog {
 
     public void setCodigoDistributivo(long codigoDistributivo) {
         this.codigoDistributivo = codigoDistributivo;
+    }
+
+    public long getCodigoPeriodo() {
+        return codigoPeriodo;
+    }
+
+    public void setCodigoPeriodo(long codigoPeriodo) {
+        this.codigoPeriodo = codigoPeriodo;
+    }
+
+    public long getCodigoMatricula() {
+        return codigoMatricula;
+    }
+
+    public void setCodigoMatricula(long codigoMatricula) {
+        this.codigoMatricula = codigoMatricula;
     }
 }

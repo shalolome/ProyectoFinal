@@ -1,5 +1,6 @@
 
-package CapaPresentacion.GestionCalificaciones.ControlCalificaciones.Parciales;
+package CapaPresentacion.GestionCalificaciones.ControlActas;
+import CapaPresentacion.GestionCalificaciones.ControlCalificaciones.*;
 import CapaPresentacion.GestionAcademica.DistributivoDocentes.*;
 import CapaPresentacion.GestionAcademica.ControlCursos.*;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.Institucion;

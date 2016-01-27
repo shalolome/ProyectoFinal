@@ -264,25 +264,25 @@
             </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuItemPeriodoAcademico">
+            <MenuItem class="javax.swing.JMenuItem" name="MenuItemCalificaciones">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Control de Actas "/>
+                <Property name="text" type="java.lang.String" value="Control de Calificaciones "/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemPeriodoAcademicoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemCalificacionesActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator11">
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="menuControlCalificaciones">
+            <Menu class="javax.swing.JMenu" name="menuControlActas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Control de Calificaciones"/>
+                <Property name="text" type="java.lang.String" value="Control de Actas"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="18" style="0"/>
                 </Property>
@@ -293,10 +293,10 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="18" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Control de Parciales"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
+                    <Property name="label" type="java.lang.String" value="Por Parciales"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemNotasParcialActionPerformed"/>
@@ -309,11 +309,10 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="18" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Control de Quimestres"/>
-                    <Property name="actionCommand" type="java.lang.String" value="Control de Quimestres"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
+                    <Property name="label" type="java.lang.String" value="Por Quimestres"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuItemNotasQuimestreActionPerformed"/>
