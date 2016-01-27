@@ -10,7 +10,9 @@ import CapaDatos.Entidades.GestionAcademica.Curso.Paralelo;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.AnioLectivo;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.Institucion;
 import CapaDatos.Entidades.GestionAdministrativa.Institucional.Seccion;
+import CapaDatos.Entidades.GestionCalificaciones.Acta;
 import CapaDatos.Entidades.GestionCalificaciones.Calificaciones;
+import CapaDatos.Entidades.GestionCalificaciones.DetalleActaParcial;
 import CapaDatos.Entidades.GestionCalificaciones.PeriodoAcademicos;
 import CapaLogica.GestionAcademica.Asignatura.LogicaAsignatura;
 import CapaLogica.GestionAcademica.Asignatura.LogicaDistributivo;
@@ -21,14 +23,20 @@ import CapaLogica.GestionAcademica.Curso.LogicaParalelo;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaAnioLectivo;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaInstitucion;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaSecciones;
+import CapaLogica.GestionCalificaciones.LogicaActa;
 import CapaLogica.GestionCalificaciones.LogicaCalificaciones;
+import CapaLogica.GestionCalificaciones.LogicaDetalleParcial;
 import CapaLogica.GestionCalificaciones.LogicaPeriodoAcademico;
 import CapaLogica.GestionEstudiantil.LogicaMatricula;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.*;
+import CapaPresentacion.Utilidades.Alertas.Mensajes;
 import CapaPresentacion.Utilidades.Validaciones.Validaciones;
 import java.awt.Frame;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +51,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
     LogicaMatricula logicaMatricula = new LogicaMatricula();
     
     Validaciones validar = new Validaciones();
+    Mensajes mensaje = new Mensajes();
     
     String[] tblEtiquetaDistributivo = new String[]{"CODIGO",
         "DOCENTE",
@@ -206,6 +215,8 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         lblParcial = new javax.swing.JLabel();
         cmbParcial = new javax.swing.JComboBox();
         btnBuscar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnVer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Acta de Calificaciones Parciales");
@@ -332,6 +343,22 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             }
         });
 
+        btnRegistrar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        btnVer.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnVer.setText("Actas");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
         pnlFondoLayout.setHorizontalGroup(
@@ -345,7 +372,7 @@ public class CalificacionesParciales extends javax.swing.JDialog {
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(237, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFondoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -383,7 +410,11 @@ public class CalificacionesParciales extends javax.swing.JDialog {
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addGap(316, 316, 316)
+                        .addGap(169, 169, 169)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnVer, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -433,7 +464,10 @@ public class CalificacionesParciales extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnVer))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -525,6 +559,59 @@ public class CalificacionesParciales extends javax.swing.JDialog {
         generarPromedio();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        LogicaDetalleParcial logicaDetParc = new LogicaDetalleParcial();
+        DetalleActaParcial objDetParcial = new DetalleActaParcial();
+        
+        if (tblListado.getRowCount() != 0) {
+            try {
+                long codigoActa = registroActa(new Acta());
+                
+                for (int i = 0; i < tblListado.getRowCount(); i++) {
+                    long codMatr = Long.parseLong(String.valueOf(tblListado.getValueAt(i, 0)));
+                    
+                    objDetParcial.setCodigoActaParcial(codigoActa);
+                    objDetParcial.setCodigoMatricula(codMatr);
+                    objDetParcial.setNotaTai(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 2))));
+                    objDetParcial.setNotaIac(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 3))));
+                    objDetParcial.setNotaAgc(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 4))));
+                    objDetParcial.setNotaLoe(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 5))));
+                    objDetParcial.setEvualuacion(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 6))));
+                    objDetParcial.setPromedio(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 7))));
+                    objDetParcial.setEstado('A');
+                    
+                    logicaDetParc.Insertar(objDetParcial);
+                }
+                
+                mensaje.MensajeInformacion("Se ha registrado correctamente", "Registrar");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(CalificacionesParciales.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        ActasParciales frm = new ActasParciales((Frame) this.getParent(), true);
+        frm.setLocationRelativeTo(null);
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnVerActionPerformed
+
+    private long registroActa(Acta obj) throws SQLException {
+
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());   
+        Date fechaDate = new Date();
+        String fechaActual = formato.format(fechaDate);
+
+        obj.setCodigoPeriodo(((PeriodoAcademicos) (cmbParcial.getSelectedItem())).getCodigo());
+        obj.setCodigoDistributivo(codigoDistributivo);
+        obj.setFechaRegistro(fechaActual);
+        
+        obj.setEstado('A');
+
+        return new LogicaActa().InsertGetId(obj);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -567,7 +654,9 @@ public class CalificacionesParciales extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btnVer;
     private javax.swing.JComboBox cmbParcial;
     private javax.swing.JComboBox cmbQuimestre;
     private javax.swing.JScrollPane jScrollPane1;

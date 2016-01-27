@@ -3,7 +3,7 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Acta de Calificaciones Parciales"/>
+    <Property name="title" type="java.lang.String" value="Detalle Actas Parciales"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="lypnlFondo" min="-2" max="-2" attributes="0"/>
+          <Component id="lypnlFondo" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -44,7 +44,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlFondo" min="-2" max="-2" attributes="0"/>
+              <Component id="pnlFondo" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -60,31 +60,25 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblTitulo" max="32767" attributes="0"/>
                                   <Component id="lblInstitucion" max="32767" attributes="0"/>
+                                  <Component id="lblTitulo" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblAsignatura" min="-2" pref="96" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtAsignatura" pref="223" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="lblParalelo1" min="-2" pref="96" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtSeccion" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblAnioLectivo" min="-2" pref="96" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtAnioLectivo" max="32767" attributes="0"/>
@@ -100,42 +94,38 @@
                                           <Component id="txtParalelo" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblAsignatura" min="-2" pref="96" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnCancelar" min="-2" pref="117" max="-2" attributes="0"/>
+                                              <EmptySpace pref="106" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtAsignatura" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblDocente" min="-2" pref="96" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtDocente" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblPeriodo" min="-2" pref="96" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPeriodo" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblQuimestre" pref="88" max="32767" attributes="0"/>
-                                  <Component id="lblParcial" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnBuscar" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="cmbParcial" max="32767" attributes="0"/>
-                                  <Component id="cmbQuimestre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnSeleccionar" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
-                              <Component id="btnRegistrar" min="-2" pref="117" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="btnVer" min="-2" pref="117" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="btnCancelar" min="-2" pref="117" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jScrollPane1" pref="725" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane2" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="583" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -143,7 +133,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblLogo" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                          <Component id="lblLogo" alignment="0" min="-2" pref="182" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
@@ -153,7 +143,6 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -164,35 +153,39 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblAnioLectivo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtAnioLectivo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbQuimestre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblQuimestre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblParalelo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSeccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblParalelo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSeccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbParcial" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblParcial" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDocente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDocente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtAsignatura" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="116" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="161" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnVer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="185" max="32767" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="167" max="-2" attributes="0"/>
+                          <EmptySpace pref="48" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -203,7 +196,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Acta de Calificaciones Parciales"/>
+                <Property name="text" type="java.lang.String" value="Detalle Actas de Parciales"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLogo">
@@ -256,50 +249,6 @@
                         <Column editable="false" title="PROMEDIO" type="java.lang.Object"/>
                       </Table>
                     </Property>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
-                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -307,23 +256,15 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblParalelo">
+            <Component class="javax.swing.JLabel" name="lblCurso">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Paralelo"/>
+                <Property name="text" type="java.lang.String" value="Curso"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblParalelo1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Secci&#xf3;n"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtSeccion">
+            <Component class="javax.swing.JTextField" name="txtCurso">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -339,12 +280,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtAsignatura">
+            <Component class="javax.swing.JLabel" name="lblParalelo">
               <Properties>
-                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="0"/>
+                  <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="Paralelo"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAnioLectivo">
@@ -363,7 +304,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCurso">
+            <Component class="javax.swing.JTextField" name="txtSeccion">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -371,23 +312,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSeleccionar">
+            <Component class="javax.swing.JLabel" name="lblParalelo1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Seleccionar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblCurso">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Curso"/>
+                <Property name="text" type="java.lang.String" value="Secci&#xf3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAsignatura">
@@ -398,107 +328,45 @@
                 <Property name="text" type="java.lang.String" value="Asignatura"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTable" name="tblListadoDistributivo">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Century Gothic" size="12" style="0"/>
-                    </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
-                        <Column editable="false" title="CODIGO" type="java.lang.Object"/>
-                        <Column editable="false" title="DOCENTE" type="java.lang.Object"/>
-                        <Column editable="false" title="CURSO" type="java.lang.Object"/>
-                        <Column editable="false" title="ASIGNATURA" type="java.lang.Object"/>
-                      </Table>
-                    </Property>
-                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblListadoDistributivoMouseReleased"/>
-                  </Events>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Component class="javax.swing.JComboBox" name="cmbQuimestre">
+            <Component class="javax.swing.JTextField" name="txtAsignatura">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbQuimestreItemStateChanged"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblQuimestre">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Quimestre"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblParcial">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Parcial"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cmbParcial">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="0"/>
+                  <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnBuscar">
+            <Component class="javax.swing.JLabel" name="lblDocente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Buscar"/>
+                <Property name="text" type="java.lang.String" value="Docente"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
-              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRegistrar">
+            <Component class="javax.swing.JTextField" name="txtDocente">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Century Gothic" size="14" style="1"/>
+                  <Font name="Century Gothic" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registrar"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarActionPerformed"/>
-              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnVer">
+            <Component class="javax.swing.JLabel" name="lblPeriodo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Actas"/>
+                <Property name="text" type="java.lang.String" value="Periodo"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerActionPerformed"/>
-              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPeriodo">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="14" style="0"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
