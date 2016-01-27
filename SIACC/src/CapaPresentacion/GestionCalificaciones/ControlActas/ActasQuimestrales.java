@@ -11,7 +11,7 @@ import CapaPresentacion.Utilidades.Alertas.Mensajes;
 import java.awt.Frame;
 import javax.swing.table.DefaultTableModel;
 
-public class ActasParciales extends javax.swing.JDialog {
+public class ActasQuimestrales extends javax.swing.JDialog {
 
     LogicaInstitucion logicaUnidadEducativa = new LogicaInstitucion();
     Institucion objInstituto = new Institucion();
@@ -29,7 +29,7 @@ public class ActasParciales extends javax.swing.JDialog {
     private boolean bandera = false;
     private long codigo;
 
-    public ActasParciales(java.awt.Frame parent, boolean modal) {
+    public ActasQuimestrales(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -40,7 +40,7 @@ public class ActasParciales extends javax.swing.JDialog {
     }
 
     public void listar() {
-        tblListado.setModel(new DefaultTableModel(logica.ListarParcial(), tblEtiqueta) {
+        tblListado.setModel(new DefaultTableModel(logica.ListarQuimestre(), tblEtiqueta) {
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
@@ -62,12 +62,12 @@ public class ActasParciales extends javax.swing.JDialog {
         tblListado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Actas Parciales");
+        setTitle("Actas Quimestrales");
 
         pnlFondo.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblTitulo.setText("Actas de Parciales");
+        lblTitulo.setText("Actas de Quimestrales");
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionCalificaciones/periodoAcademico.png"))); // NOI18N
 
@@ -122,7 +122,7 @@ public class ActasParciales extends javax.swing.JDialog {
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(214, Short.MAX_VALUE))))
+                        .addContainerGap(180, Short.MAX_VALUE))))
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGap(243, 243, 243)
                 .addComponent(btnVer, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +177,7 @@ public class ActasParciales extends javax.swing.JDialog {
             int fila = tblListado.getSelectedRow();
             long codigo = Long.parseLong((tblListado.getValueAt(fila, 0)).toString());
 
-            DetalleActaParcial frm = new DetalleActaParcial((Frame) this.getParent(), true, codigo);
+            DetalleActaQuimestre frm = new DetalleActaQuimestre((Frame) this.getParent(), true, codigo);
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);
         } else {

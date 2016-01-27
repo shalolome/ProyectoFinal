@@ -3,7 +3,7 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Actas Parciales"/>
+    <Property name="title" type="java.lang.String" value="Actas Quimestrales"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -73,7 +73,7 @@
                                   <Component id="lblInstitucion" max="32767" attributes="0"/>
                                   <Component id="lblTitulo" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="214" max="32767" attributes="0"/>
+                              <EmptySpace pref="180" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -111,7 +111,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Century Gothic" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Actas de Parciales"/>
+                <Property name="text" type="java.lang.String" value="Actas de Quimestrales"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblLogo">

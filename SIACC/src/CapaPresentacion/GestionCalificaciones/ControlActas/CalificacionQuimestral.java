@@ -12,6 +12,7 @@ import CapaDatos.Entidades.GestionAdministrativa.Institucional.Seccion;
 import CapaDatos.Entidades.GestionCalificaciones.Acta;
 import CapaDatos.Entidades.GestionCalificaciones.Calificaciones;
 import CapaDatos.Entidades.GestionCalificaciones.DetalleActaParcial;
+import CapaDatos.Entidades.GestionCalificaciones.DetalleActaQuimestre;
 import CapaDatos.Entidades.GestionCalificaciones.PeriodoAcademicos;
 import CapaLogica.GestionAcademica.Asignatura.LogicaAsignatura;
 import CapaLogica.GestionAcademica.Asignatura.LogicaDistributivo;
@@ -25,6 +26,7 @@ import CapaLogica.GestionAdministrativa.Institucional.LogicaSecciones;
 import CapaLogica.GestionCalificaciones.LogicaActa;
 import CapaLogica.GestionCalificaciones.LogicaCalificaciones;
 import CapaLogica.GestionCalificaciones.LogicaDetalleParcial;
+import CapaLogica.GestionCalificaciones.LogicaDetalleQuimestre;
 import CapaLogica.GestionCalificaciones.LogicaPeriodoAcademico;
 import CapaLogica.GestionEstudiantil.LogicaMatricula;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.*;
@@ -445,12 +447,13 @@ public class CalificacionQuimestral extends javax.swing.JDialog {
                             .addComponent(lblAnioLectivo)
                             .addComponent(txtAnioLectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblParalelo1)
-                    .addComponent(txtSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmbQuimestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblQuimestre)))
+                        .addComponent(lblQuimestre))
+                    .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblParalelo1)
+                        .addComponent(txtSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAsignatura)
@@ -545,8 +548,8 @@ public class CalificacionQuimestral extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        LogicaDetalleParcial logicaDetParc = new LogicaDetalleParcial();
-        DetalleActaParcial objDetParcial = new DetalleActaParcial();
+        LogicaDetalleQuimestre logicaDetParc = new LogicaDetalleQuimestre();
+        DetalleActaQuimestre objDetQuimestre = new DetalleActaQuimestre();
 
         if (tblListado.getRowCount() != 0) {
             try {
@@ -555,17 +558,17 @@ public class CalificacionQuimestral extends javax.swing.JDialog {
                 for (int i = 0; i < tblListado.getRowCount(); i++) {
                     long codMatr = Long.parseLong(String.valueOf(tblListado.getValueAt(i, 0)));
 
-                    objDetParcial.setCodigoActaParcial(codigoActa);
-                    objDetParcial.setCodigoMatricula(codMatr);
-                    objDetParcial.setNotaTai(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 2))));
-                    objDetParcial.setNotaIac(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 3))));
-                    objDetParcial.setNotaAgc(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 4))));
-                    objDetParcial.setNotaLoe(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 5))));
-                    objDetParcial.setEvualuacion(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 6))));
-                    objDetParcial.setPromedio(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 7))));
-                    objDetParcial.setEstado('A');
+                    objDetQuimestre.setCodigoActaQuimestre(codigoActa);
+                    objDetQuimestre.setCodigoMatricula(codMatr);
+                    objDetQuimestre.setParcial1(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 2))));
+                    objDetQuimestre.setParcial2(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 3))));
+                    objDetQuimestre.setParcial3(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 4))));
+                    objDetQuimestre.setPromedio(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 5))));
+                    objDetQuimestre.setExamen(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 6))));
+                    objDetQuimestre.setPromedioFinal(Float.valueOf(String.valueOf(tblListado.getValueAt(i, 7))));
+                    objDetQuimestre.setEstado('A');
 
-                    logicaDetParc.Insertar(objDetParcial);
+                    logicaDetParc.Insertar(objDetQuimestre);
                 }
 
                 mensaje.MensajeInformacion("Se ha registrado correctamente", "Registrar");
@@ -577,7 +580,7 @@ public class CalificacionQuimestral extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
-        ActasParciales frm = new ActasParciales((Frame) this.getParent(), true);
+        ActasQuimestrales frm = new ActasQuimestrales((Frame) this.getParent(), true);
         frm.setLocationRelativeTo(null);
         frm.setVisible(true);
     }//GEN-LAST:event_btnVerActionPerformed
