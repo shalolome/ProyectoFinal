@@ -76,17 +76,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lypnlFondo.setLayout(lypnlFondoLayout);
         lypnlFondoLayout.setHorizontalGroup(
             lypnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lypnlFondoLayout.createSequentialGroup()
-                .addContainerGap(380, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lypnlFondoLayout.createSequentialGroup()
+                .addContainerGap(307, Short.MAX_VALUE)
                 .addComponent(lblLogo)
-                .addGap(214, 214, 214))
+                .addGap(287, 287, 287))
         );
         lypnlFondoLayout.setVerticalGroup(
             lypnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lypnlFondoLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(91, 91, 91)
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         lypnlFondo.setLayer(lblLogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 

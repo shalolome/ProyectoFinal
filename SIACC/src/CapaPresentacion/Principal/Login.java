@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package CapaPresentacion.Principal;
+
+import CapaDatos.Entidades.GestionSeguridad.Usuario;
+import CapaLogica.GestionSeguridad.LogicaUsuario;
+import CapaPresentacion.Utilidades.Alertas.Mensajes;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
@@ -15,6 +20,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    LogicaUsuario logica = new LogicaUsuario();
+    Mensajes mensaje = new Mensajes();
+
     public Login() {
         initComponents();
     }
@@ -34,13 +42,14 @@ public class Login extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblClave = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNick = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtClave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio de Sesión");
+        setIconImage(getIconImage());
 
         pnlFondo.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -52,15 +61,20 @@ public class Login extends javax.swing.JFrame {
         lblClave.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblClave.setText("CONTRASEÑA");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtNick.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnLogin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnLogin.setText("Iniciar Sesión");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnCancelar.setText("Cancelar");
+
+        txtClave.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout lypnlSessionLayout = new javax.swing.GroupLayout(lypnlSession);
         lypnlSession.setLayout(lypnlSessionLayout);
@@ -79,8 +93,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                            .addComponent(jTextField2)))
+                            .addComponent(txtNick, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(txtClave)))
                     .addGroup(lypnlSessionLayout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addComponent(btnLogin)
@@ -92,15 +106,18 @@ public class Login extends javax.swing.JFrame {
             lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lypnlSessionLayout.createSequentialGroup()
                 .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsuario)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClave)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                    .addComponent(lblUsuario)
+                    .addComponent(txtNick, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(lypnlSessionLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lypnlSessionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(lypnlSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnCancelar))
@@ -109,10 +126,10 @@ public class Login extends javax.swing.JFrame {
         lypnlSession.setLayer(lblLogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lypnlSession.setLayer(lblUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lypnlSession.setLayer(lblClave, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        lypnlSession.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        lypnlSession.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lypnlSession.setLayer(txtNick, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lypnlSession.setLayer(btnLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
         lypnlSession.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        lypnlSession.setLayer(txtClave, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
@@ -157,6 +174,32 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("CapaPresentacion/Imagenes/Logos/Logo_1.png"));
+
+
+        return retValue;
+    }
+    
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        Usuario usuario = logica.loginUsuario(txtNick.getText(), txtClave.getText());
+
+        if (usuario != null) {
+
+            mensaje.MensajeInformacion("Se ha logeado correctamente", "SESION");
+            this.dispose();
+
+            MenuPrincipal frm = new MenuPrincipal();
+            frm.setVisible(true);
+            frm.setLocationRelativeTo(null);
+
+        } else {
+            mensaje.MensajeError("Usuario o Contraseña incorrecta..!!!", "ERROR DE SESION");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,13 +238,13 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JLayeredPane lypnlFondo;
     private javax.swing.JLayeredPane lypnlSession;
     private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JTextField txtNick;
     // End of variables declaration//GEN-END:variables
 }

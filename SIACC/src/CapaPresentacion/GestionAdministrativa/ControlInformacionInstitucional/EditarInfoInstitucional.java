@@ -439,7 +439,7 @@ public class EditarInfoInstitucional extends javax.swing.JDialog {
         setBandera(true);
 
         obj.setCodigo(codigo);
-        obj.setCodigoRepresentante(1);
+        obj.setCodigoRepresentante(codigoPersonal);
         obj.setCodigoParroquia(((Parroquia) cmbParroquia.getSelectedItem()).getCodigoParroquia());
         obj.setNombre(txtNombre.getText());
         obj.setCodigoDistrito(txtCodigoDistrito.getText());

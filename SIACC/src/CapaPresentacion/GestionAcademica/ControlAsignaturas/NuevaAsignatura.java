@@ -6,6 +6,7 @@ import CapaDatos.Entidades.GestionAdministrativa.Institucional.Institucion;
 import CapaLogica.GestionAcademica.Asignatura.LogicaAsignatura;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaInstitucion;
 import CapaPresentacion.Utilidades.Alertas.Mensajes;
+import CapaPresentacion.Utilidades.Validaciones.Validaciones;
 
 public class NuevaAsignatura extends javax.swing.JDialog {
 
@@ -16,6 +17,7 @@ public class NuevaAsignatura extends javax.swing.JDialog {
     Asignatura obj = new Asignatura();
     
     Mensajes mensaje = new Mensajes();
+    Validaciones validar = new Validaciones();
     private boolean bandera = false;
     
     public NuevaAsignatura(java.awt.Frame parent, boolean modal) {
@@ -56,7 +58,7 @@ public class NuevaAsignatura extends javax.swing.JDialog {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionAcademica/asignaruras.png"))); // NOI18N
 
         lblCodigo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblCodigo.setText("Código");
+        lblCodigo.setText("Referencia");
 
         lblSeccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblSeccion.setText("Nombre");
@@ -64,6 +66,7 @@ public class NuevaAsignatura extends javax.swing.JDialog {
         lblDescripcion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblDescripcion.setText("Descripción");
 
+        txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         txtDescripcion.setColumns(20);
@@ -91,6 +94,11 @@ public class NuevaAsignatura extends javax.swing.JDialog {
         lblInstitucion.setText("Institución");
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
@@ -205,6 +213,10 @@ public class NuevaAsignatura extends javax.swing.JDialog {
         
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        validar.validarLetras(evt);
+    }//GEN-LAST:event_txtNombreKeyTyped
 
     public void limpiar(){
         txtNombre.setText("");

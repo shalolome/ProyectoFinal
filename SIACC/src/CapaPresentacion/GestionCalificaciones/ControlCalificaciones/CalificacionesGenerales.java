@@ -27,6 +27,7 @@ import CapaLogica.GestionCalificaciones.LogicaTipoNota;
 import CapaLogica.GestionEstudiantil.LogicaMatricula;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.*;
 import CapaPresentacion.Utilidades.Alertas.Mensajes;
+import CapaPresentacion.Utilidades.Validaciones.Validaciones;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class CalificacionesGenerales extends javax.swing.JDialog {
         "SECCION"};
 
     Mensajes mensaje = new Mensajes();
+    Validaciones validar = new Validaciones();
     
     private long codigoGrado;
     private long codigoDistributivo;
@@ -270,6 +272,11 @@ public class CalificacionesGenerales extends javax.swing.JDialog {
         lblCedula.setText("Nota");
 
         txtNota.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtNota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNotaKeyTyped(evt);
+            }
+        });
 
         btnGrpPeriodo.add(rbtnParcial);
         rbtnParcial.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -722,6 +729,10 @@ public class CalificacionesGenerales extends javax.swing.JDialog {
             setCodigoMatricula(codigo);
         }
     }//GEN-LAST:event_tblListadoMouseReleased
+
+    private void txtNotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNotaKeyTyped
+        validar.numerosDecimales(evt, txtNota);
+    }//GEN-LAST:event_txtNotaKeyTyped
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

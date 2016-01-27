@@ -90,13 +90,13 @@ public class NuevaMallaCurricular extends javax.swing.JDialog {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionAcademica/mallaCurricular.png"))); // NOI18N
 
         lblCodigo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblCodigo.setText("Código");
+        lblCodigo.setText("Referencia");
 
         lblCurso.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblCurso.setText("Curso");
 
         lblVigencia.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblVigencia.setText("Vigencia");
+        lblVigencia.setText("Descripción");
 
         txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 

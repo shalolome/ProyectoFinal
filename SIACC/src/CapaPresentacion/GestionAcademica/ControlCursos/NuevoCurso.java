@@ -13,6 +13,7 @@ import CapaLogica.GestionAdministrativa.Institucional.LogicaAnioLectivo;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaInstitucion;
 import CapaLogica.GestionAdministrativa.Institucional.LogicaSecciones;
 import CapaPresentacion.Utilidades.Alertas.Mensajes;
+import CapaPresentacion.Utilidades.Validaciones.Validaciones;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -27,6 +28,7 @@ public class NuevoCurso extends javax.swing.JDialog {
     Institucion objInstituto = new Institucion();
     
     Mensajes mensaje = new Mensajes();
+    Validaciones validar = new Validaciones();
     private boolean bandera = false;
 
     public NuevoCurso(java.awt.Frame parent, boolean modal) {
@@ -117,12 +119,17 @@ public class NuevoCurso extends javax.swing.JDialog {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CapaPresentacion/Imagenes/GestionAcademica/cursos.png"))); // NOI18N
 
         lblCodigo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        lblCodigo.setText("Código");
+        lblCodigo.setText("Referencia");
 
         lblCurso.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblCurso.setText("Curso");
 
         txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
 
         cmbCurso.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
@@ -284,6 +291,10 @@ public class NuevoCurso extends javax.swing.JDialog {
 
         this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        validar.convMayNumEscap(evt);
+    }//GEN-LAST:event_txtCodigoKeyTyped
 
     public void limpiar() {
         txtCodigo.setText("");

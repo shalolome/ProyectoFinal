@@ -83,6 +83,7 @@ public class NuevaSeccion extends javax.swing.JDialog {
         lblDescripcion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         lblDescripcion.setText("Descripción");
 
+        txtCodigo.setEditable(false);
         txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         cmbSeccion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
