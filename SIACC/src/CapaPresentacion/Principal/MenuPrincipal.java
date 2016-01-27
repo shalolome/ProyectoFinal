@@ -11,6 +11,7 @@ import CapaPresentacion.GestionAdministrativa.AsignacionCargos.AsignacionCargos;
 import CapaPresentacion.GestionAdministrativa.ConfiguracionSecciones.ConfiguracionSecciones;
 import CapaPresentacion.GestionAdministrativa.ControlInformacionInstitucional.InformacionInstitucional;
 import CapaPresentacion.GestionAdministrativa.ControlPersonal.PersonalAdministrativo;
+import CapaPresentacion.GestionCalificaciones.ControlActas.CalificacionQuimestral;
 import CapaPresentacion.GestionCalificaciones.ControlActas.CalificacionesParciales;
 import CapaPresentacion.GestionCalificaciones.ControlCalificaciones.CalificacionesGenerales;
 import CapaPresentacion.GestionEstudiantil.ControlRepresentantes.ControlRepresentantes;
@@ -420,7 +421,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuItemNotasParcialActionPerformed
 
     private void MenuItemNotasQuimestreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemNotasQuimestreActionPerformed
-        // TODO add your handling code here:
+        CalificacionQuimestral frm = new CalificacionQuimestral(this, true);
+        frm.setLocationRelativeTo(null);
+        frm.setVisible(true);
     }//GEN-LAST:event_MenuItemNotasQuimestreActionPerformed
 
     public static void main(String args[]) {

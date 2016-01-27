@@ -11,6 +11,7 @@ public class DetalleActaParcial {
     private float notaLoe;
     private float evualuacion;
     private float promedio;
+    private String promedioParcial;
     private char estado;
 
     public long getCodigo() {
@@ -91,5 +92,13 @@ public class DetalleActaParcial {
 
     public void setEstado(char estado) {
         this.estado = estado;
+    }
+
+    public String getPromedioParcial() {
+        return promedioParcial;
+    }
+
+    public void setPromedioParcial(String promedioParcial) {
+        this.promedioParcial = promedioParcial;
     }
 }

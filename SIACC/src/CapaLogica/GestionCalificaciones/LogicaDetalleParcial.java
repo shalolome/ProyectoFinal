@@ -60,7 +60,7 @@ public class LogicaDetalleParcial {
                     + "INNER JOIN siacc_seccion ON siacc_grado.codigo_secc=siacc_seccion.codigo_secc\n"
                     + "INNER JOIN siacc_estudiante ON siacc_matricula.codigo_estu=siacc_estudiante.codigo_estu\n"
                     + "INNER JOIN siacc_persona ON siacc_estudiante.codigo_pers=siacc_persona.codigo_pers\n"
-                    + "WHERE estado_acal LIKE 'A' AND siacc_actacalificaciones.codigo_acal='"+codActa+"'");
+                    + "WHERE estado_acal LIKE 'A' AND siacc_actacalificaciones.codigo_acal='" + codActa + "'");
             rs.last();
             Object[][] obj = new Object[rs.getRow()][8];
             rs.beforeFirst();
@@ -100,6 +100,32 @@ public class LogicaDetalleParcial {
         }
     }
 
+    ////Buscar Detalle de Promedio Parcial por Codigo
+    public DetalleActaParcial buscarDetPromParcPorCod(long codParc, long codMatri, long codDistr) {
+        try {
+            Conexion conexionBD = new Conexion();
+            ResultSet rs = conexionBD.Consulta("SELECT promedio_dpar\n"
+                    + "FROM siacc_actacalificaciones\n"
+                    + "INNER JOIN siacc_detalleparcial ON siacc_actacalificaciones.codigo_acal=siacc_detalleparcial.codigo_acal\n"
+                    + "INNER JOIN siacc_matricula ON siacc_detalleparcial.codigo_matr=siacc_matricula.codigo_matr\n"
+                    + "INNER JOIN siacc_grado ON siacc_matricula.codigo_grad=siacc_grado.codigo_grad\n"
+                    + "INNER JOIN siacc_cursos ON siacc_grado.codigo_curs=siacc_cursos.codigo_curs\n"
+                    + "INNER JOIN siacc_paralelo ON siacc_grado.codigo_para=siacc_paralelo.codigo_para\n"
+                    + "INNER JOIN siacc_seccion ON siacc_grado.codigo_secc=siacc_seccion.codigo_secc\n"
+                    + "INNER JOIN siacc_estudiante ON siacc_matricula.codigo_estu=siacc_estudiante.codigo_estu\n"
+                    + "INNER JOIN siacc_persona ON siacc_estudiante.codigo_pers=siacc_persona.codigo_pers\n"
+                    + "WHERE estado_acal LIKE 'A' AND siacc_actacalificaciones.codigo_paca='"+codParc+"'\n"
+                    + "AND siacc_detalleparcial.codigo_matr='"+codMatri+"' AND siacc_actacalificaciones.codigo_distr='"+codDistr+"'");
+            if (rs.next()) {
+                return CrearDetProm(rs);
+            } else {
+                return null;
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al Obtener Detalle de Acta Parcial por Codigo");
+        }
+    }
+
     //Metodo para Crear Objeto
     private DetalleActaParcial Crear(ResultSet rs) {
         DetalleActaParcial obj;
@@ -115,6 +141,19 @@ public class LogicaDetalleParcial {
             obj.setEvualuacion(rs.getFloat("evaluacion_dpar"));
             obj.setPromedio(rs.getFloat("promedio_dpar"));
             obj.setEstado(rs.getString("estado_dpar").charAt(0));
+
+            return obj;
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al Crear Objeto");
+        }
+    }
+    
+    //Metodo para Crear Objeto
+    private DetalleActaParcial CrearDetProm(ResultSet rs) {
+        DetalleActaParcial obj;
+        try {
+            obj = new DetalleActaParcial();
+            obj.setPromedioParcial(rs.getString("promedio_dpar"));
 
             return obj;
         } catch (Exception ex) {
